@@ -27,9 +27,33 @@ docker run -d --name rocketmq-dashboard -e "JAVA_OPTS=-Drocketmq.namesrv.addr=12
 2. 64bit JDK 1.8+;
 3. Maven 3.2.x;
 
-#### Maven spring-boot run
 
-```shell
+### With Docker Compose
+
+```
+rocketmq-dashboard:
+  profiles:
+    - infra
+  image: schnell18/rocketmq-dashboard:2.0.0
+  healthcheck:
+    test: "nc -z localhost 8080"
+    interval: 30s
+    timeout: 10s
+    retries: 5
+  depends_on:
+    - namesrv
+  environment:
+    - ROCKETMQ_CONFIG_NAMESRVADDR=namesrv:9876
+  ports:
+    - 7800:8080
+  volumes:
+    - ./.state/rocketmq/dashboard/logs:/rocketmq-console/logs
+    - ./.state/rocketmq/dashboard/data:/rocketmq-console/data
+```
+
+### Without Docker
+require java 1.8+
+```
 mvn spring-boot:run
 ```
 or
@@ -50,7 +74,7 @@ java -jar target/rocketmq-dashboard-1.0.1-SNAPSHOT.jar
             <id>alimaven</id>
             <name>aliyun maven</name>
             <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-            <mirrorOf>central</mirrorOf>        
+            <mirrorOf>central</mirrorOf>
       </mirror>
   </mirrors>
   ```

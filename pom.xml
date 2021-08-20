@@ -95,7 +95,7 @@
         <aspectj.version>1.9.6</aspectj.version>
         <lombok.version>1.18.12</lombok.version>
         <main.basedir>${basedir}/../..</main.basedir>
-        <docker.image.prefix>apacherocketmq</docker.image.prefix>
+        <docker.image.prefix>schnell18</docker.image.prefix>
         <spring.boot.version>2.2.2.RELEASE</spring.boot.version>
         <mockito-inline.version>3.3.3</mockito-inline.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
